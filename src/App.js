@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddButton from './components/AddButton/AddButton';
-import Modal from './components/Modal/Modal';
+import { ModalContainer } from './components/Modal/ModalContainer';
 import Card from './components/Card/Card';
 
 import './App.scss';
@@ -19,7 +19,7 @@ class App extends Component {
         </header>
 
         <main>
-          <Modal />
+          <ModalContainer />
           <div className="container">
             <div className="columns is-multiline  is-gapless">
               <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
