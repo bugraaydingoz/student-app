@@ -23,6 +23,10 @@ class Database {
     return Database._instance;
   }
 
+  static format(sql, values) {
+    return mysql.format(sql, values);
+  }
+
   getConnection() {
     return this.pool;
   }

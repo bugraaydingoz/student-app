@@ -29,8 +29,7 @@ router.get('/', studentController.getAll);
 router.get('/:studentId', studentController.get);
 
 // POST /students/
-// router.post('/', upload.single('pp'), studentController.post);
-router.post('/', upload.single('pp'), studentController.post);
+router.post('/', upload.single('profilePicture'), studentController.post);
 
 // PUT /students/:studentId
 router.put('/:studentId', studentController.update);

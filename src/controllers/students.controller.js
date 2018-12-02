@@ -19,7 +19,7 @@ const get = (req, res, next) => {
 };
 
 const post = (req, res, next) => {
-  const product = {
+  const student = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     birthDate: req.body.birthDate,
@@ -27,23 +27,44 @@ const post = (req, res, next) => {
     ppLink: req.file.path,
   };
 
-  console.log(product);
-
-  res.status(201).json({ message: 'User was created.', product });
-
-  //   query(`SELECT * FROM students WHERE id = ${studentId}`)
-  //     .then(student => {
-  //       res.status(200).json({ ...student[0] });
-  //     })
-  //     .catch(next);
+  query(
+    `INSERT INTO students (first_name, last_name, birth_date, hobbies, pp_link) VALUES (?, ?, ?, ?, ?)`,
+    Object.values(student),
+  )
+    .then(response => {
+      const _student = { ...student, id: response.insertId };
+      res.status(201).json({ message: 'Student  was created.', student: _student });
+    })
+    .catch(next);
 };
 
 const update = (req, res, next) => {
-  res.json({ message: 'works' });
+  const studentId = req.params.studentId;
+  const student = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    birthDate: req.body.birthDate,
+    hobbies: req.body.hobbies,
+  };
+
+  query(
+    `UPDATE students SET first_name = ?, last_name = ?, birth_date = ?, hobbies = ? WHERE id = ?`,
+    [...Object.values(student), studentId],
+  )
+    .then(response => {
+      const _student = { ...student, id: studentId };
+      res.status(201).json({ message: 'Student was updated.', student: _student });
+    })
+    .catch(next);
 };
 
 const remove = (req, res, next) => {
-  res.json({ message: 'works' });
+  const studentId = req.params.studentId;
+  query(`DELETE FROM students WHERE id = ${studentId}`)
+    .then(response => {
+      res.status(200).json({ message: 'Student was deleted.' });
+    })
+    .catch(next);
 };
 
 module.exports = {
