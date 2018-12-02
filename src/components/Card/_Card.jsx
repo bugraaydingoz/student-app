@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './Card.scss';
 export default class _Card extends Component {
   render() {
-    const { first_name, last_name, birth_date, hobbies, pp_link } = this.props.student.student;
+    const { id, first_name, last_name, birth_date, hobbies, pp_link } = this.props.student.student;
 
     return (
       <div className="card">
@@ -23,7 +23,9 @@ export default class _Card extends Component {
           <button className="button is-white is-rounded" id="edit">
             Edit
           </button>
-          <div id="delete">Delete</div>
+          <div id="delete" onClick={() => this.props.delete(id)}>
+            Delete
+          </div>
         </div>
       </div>
     );

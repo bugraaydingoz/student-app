@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import _Modal from './_Modal';
 import { toggleModal } from '../../redux/actions/modal.actions';
+import { addStudent } from '../../redux/actions/student.actions';
 
 const mapStateToProps = state => {
   return {
@@ -11,6 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     toggle: () => dispatch(toggleModal()),
+    addStudent: student => dispatch(addStudent(student)),
   };
 };
 

@@ -31,6 +31,7 @@ export default class _App extends Component {
               {students.map((student, index) => {
                 return <CardContainer key={index} student={student} />;
               })}
+              {students.length === 0 && <NoStudentText />}
             </div>
           </div>
         </main>
@@ -53,5 +54,11 @@ export default class _App extends Component {
 const CardContainer = student => (
   <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
     <Card student={student} />
+  </div>
+);
+
+const NoStudentText = () => (
+  <div className="column is-full">
+    <h1 className="no-student has-text-centered">There is not any students yet.</h1>
   </div>
 );
