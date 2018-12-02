@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
-import './AddButton.scss';
+import { connect } from 'react-redux';
+import _AddButton from './_AddButton';
+import { toggleModal } from '../../redux/actions/modal.actions';
 
-export default class AddButton extends Component {
-  render() {
-    return (
-      <>
-        <button className="button is-white is-rounded" id="add" onClick={() => this.props.toggle()}>
-          Add Student
-        </button>
-      </>
-    );
-  }
-}
+export const mapStateToProps = state => {
+  return {};
+};
+
+export const mapDispatchToProps = dispatch => {
+  return {
+    toggle: () => dispatch(toggleModal()),
+  };
+};
+
+export const AddButton = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(_AddButton);
