@@ -7,12 +7,15 @@ date, hobbies, photo. Also you can add new student, edit or delete a student.
 
 ### Technology Stack
 
--   React.js
--   Redux
--   Sass
--   Flow
--   Eslint
--   Jest
+- React.js
+- Redux
+- Redux Thunk
+- Sass
+- Bulma
+- CSS Flexbox
+- Flow
+- Eslint
+- Jest
 
 ### Demo
 

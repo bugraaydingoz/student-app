@@ -3,20 +3,20 @@ import React, { Component } from 'react';
 import './Card.scss';
 export default class _Card extends Component {
   render() {
+    const { first_name, last_name, birth_date, hobbies, pp_link } = this.props.student.student;
+
     return (
       <div className="card">
         <div className="image is-128by128">
-          <img
-            className="is-rounded"
-            src="https://bulma.io/images/placeholders/128x128.png"
-            alt="Student"
-          />
+          <img className="is-rounded" src={pp_link} alt="Student" />
         </div>
 
         <div className="card-content">
-          <h3 className="name">Bugra Aydingoz</h3>
-          <p className="birth-date">29.01.1996</p>
-          <p className="hobbies">Reading books, Playing video games</p>
+          <h3 className="name">
+            {first_name} {last_name}
+          </h3>
+          <p className="birth-date">{birth_date}</p>
+          <p className="hobbies">{hobbies}</p>
         </div>
 
         <div className="buttons">

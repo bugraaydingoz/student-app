@@ -5,7 +5,8 @@ import { initialStudentState } from './root.reducer';
 export default function studentReducer(state = initialStudentState, action) {
   switch (action.type) {
     case GET_ALL_STUDENTS:
-      return { ...state };
+      const students = action.students;
+      return [...state, ...students];
     default:
       return state;
   }

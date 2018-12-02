@@ -7,9 +7,7 @@ export const initialModalState = {
   student: {},
 };
 
-export const initialStudentState = {
-  students: [],
-};
+export const initialStudentState = [];
 
 export const initialRootState = {
   ...initialModalState,
