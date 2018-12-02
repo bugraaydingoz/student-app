@@ -5,7 +5,7 @@ export default class AddButton extends Component {
   render() {
     return (
       <>
-        <button className="button is-white is-rounded" id="add">
+        <button className="button is-white is-rounded" id="add" onClick={() => this.props.toggle()}>
           Add Student
         </button>
       </>

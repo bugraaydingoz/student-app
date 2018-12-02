@@ -4,8 +4,8 @@ import './Modal.scss';
 export default class Modal extends Component {
   render() {
     return (
-      <div className="modal">
-        <div className="modal-background" />
+      <div className={`modal ${this.props.isActive ? 'is-active' : ''}`}>
+        <div className="modal-background" onClick={() => this.props.toggle()} />
         <div className="modal-content">
           <h1 className="title is-3">Add a new student</h1>
           <div className="field">
@@ -48,7 +48,11 @@ export default class Modal extends Component {
             Submit
           </button>
         </div>
-        <button className="modal-close is-large" aria-label="close" />
+        <button
+          className="modal-close is-large"
+          aria-label="close"
+          onClick={() => this.props.toggle()}
+        />
       </div>
     );
   }

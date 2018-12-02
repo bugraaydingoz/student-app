@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddButton from './components/AddButton/AddButton';
+import { AddButtonContainer } from './components/AddButton/AddButtonContainer';
 import { ModalContainer } from './components/Modal/ModalContainer';
 import Card from './components/Card/Card';
 
@@ -15,7 +15,7 @@ class App extends Component {
             It is an application where you can show list of students, and have the ability to add,
             edit and delete them.
           </p>
-          <AddButton />
+          <AddButtonContainer />
         </header>
 
         <main>

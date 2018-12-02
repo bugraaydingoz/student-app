@@ -1,20 +1,18 @@
 import { connect } from 'react-redux';
-import Modal from './Modal';
+import AddButton from './AddButton';
 import { toggleModal } from '../../redux/actions/modal.actions';
 
-const mapStateToProps = state => {
-  return {
-    isActive: state.modal.isActive,
-  };
+export const mapStateToProps = state => {
+  return {};
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     toggle: () => dispatch(toggleModal()),
   };
 };
 
-export const ModalContainer = connect(
+export const AddButtonContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Modal);
+)(AddButton);

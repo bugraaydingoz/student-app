@@ -22,10 +22,7 @@
     "lint": "eslint"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "airbnb"
-    ]
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

@@ -3,7 +3,7 @@ import studentReducer from './student.reducer';
 import modalReducer from './modal.reducer';
 
 export const initialModalState = {
-  isActive: false,
+  isActive: true,
   student: {},
 };
 
