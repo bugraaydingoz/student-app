@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const studentController = require('../controllers/students.controller');
+
+// Handle file upload
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -22,19 +24,10 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage, fileFilter });
 
-// GET /students
 router.get('/', studentController.getAll);
-
-// GET /students/:studentId
 router.get('/:studentId', studentController.get);
-
-// POST /students/
 router.post('/', upload.single('profilePicture'), studentController.post);
-
-// PUT /students/:studentId
 router.put('/:studentId', studentController.update);
-
-// DELETE /students/:studentId
 router.delete('/:studentId', studentController.remove);
 
 module.exports = router;

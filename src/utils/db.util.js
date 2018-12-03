@@ -9,8 +9,6 @@ module.exports = async function query(sql, values) {
       _sql = sql;
     }
 
-    console.log(_sql);
-
     Database.getInstance()
       .getConnection()
       .query(_sql, (err, res) => {

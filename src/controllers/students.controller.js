@@ -1,10 +1,13 @@
 const query = require('../utils/db.util');
+const studentMapper = require('../utils/object.util');
 
 const getAll = (req, res, next) => {
   query(`SELECT * FROM students`)
     .then(students => {
       const count = students.length;
-      res.status(200).json({ message: 'Students were fetched.', count, students });
+
+      const _students = students.map(student => studentMapper(student, 'snake'));
+      res.status(200).json({ message: 'Students were fetched.', count, students: _students });
     })
     .catch(next);
 };
@@ -13,7 +16,8 @@ const get = (req, res, next) => {
   const studentId = req.params.studentId;
   query(`SELECT * FROM students WHERE id = ${studentId}`)
     .then(student => {
-      res.status(200).json({ ...student[0] });
+      const _student = studentMapper(student[0], 'snake');
+      res.status(200).json({ ..._student });
     })
     .catch(next);
 };
