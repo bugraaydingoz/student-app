@@ -9,7 +9,7 @@ export default function studentReducer(state = initialStudentState, action) {
       return [...state, ...students];
     case ADD_STUDENT:
       const student = action.student;
-      return [...state, ...student];
+      return [...state, student];
     case DELETE_STUDENT:
       const id = action.id;
       return state.filter(student => student.id !== id);

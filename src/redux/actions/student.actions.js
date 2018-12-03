@@ -24,11 +24,8 @@ export function addStudent(student) {
     return fetch(`/api/v1/students/`, { method: 'POST', body: student })
       .then(result => result.json())
       .then(result => {
-        // TODO: Put status/ok on server
-        if (result.message === 'Student was created.') {
+        if (result.ok) {
           const _student = result.student;
-          console.log(_student);
-
           dispatch({ type: ADD_STUDENT, student: _student });
         }
       })
@@ -41,8 +38,7 @@ export function editStudent(id, student) {
     return fetch(`/api/v1/students/${id}`, { method: 'PUT' })
       .then(result => result.json())
       .then(result => {
-        // TODO: Put status/ok on server
-        if (result.message === 'Student was updated.') {
+        if (result.ok) {
           dispatch({ type: DELETE_STUDENT, id });
         }
       })
@@ -55,8 +51,7 @@ export function deleteStudent(id) {
     return fetch(`/api/v1/students/${id}`, { method: 'DELETE' })
       .then(result => result.json())
       .then(result => {
-        // TODO: Put status/ok on server
-        if (result.message === 'Student was deleted.') {
+        if (result.ok) {
           dispatch({ type: DELETE_STUDENT, id });
         }
       })
