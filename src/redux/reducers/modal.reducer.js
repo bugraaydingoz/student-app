@@ -1,14 +1,16 @@
-import { TOGGLE_MODAL, SET_STUDENT } from '../actions/modal.actions';
+import { TOGGLE_MODAL, SET_STUDENT, RESET_MODAL } from '../actions/modal.actions';
 import { initialModalState } from './root.reducer';
 
 export default function modalReducer(state = initialModalState, action) {
-  switch (action.type) {
-    case TOGGLE_MODAL:
-      return { ...state, isActive: !state.isActive };
-    case SET_STUDENT:
-      const student = action.student;
-      return { ...state, student };
-    default:
-      return state;
+  if (action.type === TOGGLE_MODAL) {
+    return { ...state, isActive: !state.isActive };
+  } else if (action.type === SET_STUDENT) {
+    const student = action.student;
+    return { ...state, student };
+  } else if (action.type === RESET_MODAL) {
+    const student = action.student;
+    return { ...state, student };
+  } else {
+    return state;
   }
 }

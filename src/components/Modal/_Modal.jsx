@@ -18,9 +18,16 @@ export default class _Modal extends Component {
     this.handleBirthDate = this.handleBirthDate.bind(this);
     this.handleHobbies = this.handleHobbies.bind(this);
     this.handleFile = this.handleFile.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.student && nextProps.student.id && this.props.student && !this.props.student.id) {
+      this.setState({ ...nextProps.student });
+    } else if (nextProps.student && !nextProps.student.id && this.state.firstName !== '') {
+      this.resetState();
+    }
+  }
   handleFirstName(event) {
     this.setState({
       firstName: event.target.value,
@@ -52,21 +59,6 @@ export default class _Modal extends Component {
     });
   }
 
-  handleSubmit() {
-    const { firstName, lastName, birthDate, hobbies, file } = this.state;
-
-    const student = new FormData();
-    student.append('firstName', firstName);
-    student.append('lastName', lastName);
-    student.append('birthDate', birthDate);
-    student.append('hobbies', hobbies);
-    student.append('profilePicture', file);
-
-    this.props.addStudent(student);
-    this.props.toggle();
-    this.resetState();
-  }
-
   resetState() {
     this.setState({
       firstName: '',
@@ -80,7 +72,8 @@ export default class _Modal extends Component {
 
   render() {
     const isActive = this.props.isActive ? 'is-active' : '';
-    const fileName = this.state.fileName === '' ? 'No file chosen.' : this.state.fileName;
+    const { firstName, lastName, birthDate, hobbies, fileName } = this.state;
+    let _fileName = fileName === '' || fileName === undefined ? 'No file chosen.' : fileName;
 
     return (
       <div className={`modal ${isActive}`}>
@@ -94,6 +87,7 @@ export default class _Modal extends Component {
                 className="input"
                 type="text"
                 placeholder="John"
+                value={firstName}
                 onChange={this.handleFirstName}
               />
             </div>
@@ -105,6 +99,7 @@ export default class _Modal extends Component {
                 className="input"
                 type="text"
                 placeholder="Doe"
+                value={lastName}
                 onChange={this.handleLastName}
               />
             </div>
@@ -116,6 +111,7 @@ export default class _Modal extends Component {
                 className="input"
                 type="text"
                 placeholder="29.01.1996"
+                value={birthDate}
                 onChange={this.handleBirthDate}
               />
             </div>
@@ -125,6 +121,7 @@ export default class _Modal extends Component {
             <textarea
               className="textarea"
               placeholder="e.g. reading, cooking"
+              value={hobbies}
               onChange={this.handleHobbies}
             />
           </div>
@@ -144,11 +141,18 @@ export default class _Modal extends Component {
                   </span>
                   <span className="file-label">Choose a profile picture</span>
                 </span>
-                <span className="file-name">{fileName}</span>
+                <span className="file-name">{_fileName}</span>
               </label>
             </div>
           </div>
-          <button className="button is-white is-rounded" id="modal-add" onClick={this.handleSubmit}>
+          <button
+            className="button is-white is-rounded"
+            id="modal-add"
+            onClick={() => {
+              this.props.handleSubmit(this.state);
+              this.resetState();
+            }}
+          >
             Submit
           </button>
         </div>
