@@ -15,7 +15,6 @@ const mapDispatchToProps = dispatch => {
     toggle: () => dispatch(toggleModal()),
     handleSubmit: student => {
       const { firstName, lastName, birthDate, hobbies, file } = student;
-
       dispatch(setStudent(student));
 
       const _student = new FormData();

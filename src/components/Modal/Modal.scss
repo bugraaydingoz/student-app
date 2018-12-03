@@ -5,6 +5,20 @@
   padding: 36px;
   border-radius: 26px;
 
+  .file {
+    display: block !important;
+  }
+
+  .image-container {
+    width: 100%;
+    margin-bottom: 20px;
+    .image {
+      display: flex;
+      width: 128px !important;
+      height: 128px !important;
+    }
+  }
+
   #modal-add {
     background-color: $primary;
     color: white;

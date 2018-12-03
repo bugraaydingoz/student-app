@@ -20,6 +20,7 @@ $primary-light: lighten(#1be1b9, 10%);
     width: 128px !important;
     height: 128px !important;
   }
+
   .card-content {
     .name {
       font-size: 1.2rem;
@@ -39,6 +40,8 @@ $primary-light: lighten(#1be1b9, 10%);
     .hobbies {
       font-size: 0.9rem;
       text-align: center;
+      height: 60px !important;
+      overflow: hidden;
     }
   }
 

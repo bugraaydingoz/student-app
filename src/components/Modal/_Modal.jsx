@@ -9,8 +9,10 @@ export default class _Modal extends Component {
       lastName: '',
       birthDate: '',
       hobbies: '',
+      ppLink: '',
       file: {},
       fileName: '',
+      isEdit: false,
     };
 
     this.handleFirstName = this.handleFirstName.bind(this);
@@ -23,8 +25,8 @@ export default class _Modal extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.student && nextProps.student.id && this.props.student && !this.props.student.id) {
-      this.setState({ ...nextProps.student });
-    } else if (nextProps.student && !nextProps.student.id && this.state.firstName !== '') {
+      this.setState({ ...nextProps.student, isEdit: true });
+    } else if (nextProps.student && !nextProps.student.id && this.state.isEdit) {
       this.resetState();
     }
   }
@@ -65,21 +67,24 @@ export default class _Modal extends Component {
       lastName: '',
       birthDate: '',
       hobbies: '',
+      ppLink: '',
       file: {},
       fileName: '',
+      isEdit: false,
     });
   }
 
   render() {
     const isActive = this.props.isActive ? 'is-active' : '';
-    const { firstName, lastName, birthDate, hobbies, fileName } = this.state;
+    const { firstName, lastName, birthDate, hobbies, fileName, ppLink, isEdit } = this.state;
     let _fileName = fileName === '' || fileName === undefined ? 'No file chosen.' : fileName;
 
+    const title = !isEdit ? 'Add a new student' : 'Edit the student';
     return (
       <div className={`modal ${isActive}`}>
         <div className="modal-background" onClick={this.props.toggle} />
         <div className="modal-content">
-          <h1 className="title is-3">Add a new student</h1>
+          <h1 className="title is-3">{title}</h1>
           <div className="field">
             <label className="label">First Name</label>
             <div className="control">
@@ -128,6 +133,13 @@ export default class _Modal extends Component {
           <div className="field">
             <label className="label">Profile Picture</label>
             <div className="file has-name">
+              {isEdit && (
+                <div className="image-container">
+                  <div className="image is-128by128">
+                    <img className="is-rounded" src={ppLink} alt="Student" />
+                  </div>
+                </div>
+              )}
               <label className="file-label">
                 <input
                   className="file-input"
@@ -139,9 +151,11 @@ export default class _Modal extends Component {
                   <span className="file-icon">
                     <i className="fas fa-upload" />
                   </span>
-                  <span className="file-label">Choose a profile picture</span>
+                  <span className="file-label">Choose a picture</span>
                 </span>
-                <span className="file-name">{_fileName}</span>
+                {(isEdit && _fileName === 'No file chosen.' && (
+                  <span className="file-name">Choose a file to edit.</span>
+                )) || <span className="file-name">{_fileName}</span>}
               </label>
             </div>
           </div>

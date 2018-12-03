@@ -37,6 +37,7 @@ export function resetModal() {
     const student = {
       firstName: '',
       lastName: '',
+      ppLink: '',
       birthDate: '',
       hobbies: '',
       file: {},
