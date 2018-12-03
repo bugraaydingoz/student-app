@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AddButton } from './components/AddButton/AddButton';
 import { Modal } from './components/Modal/Modal';
 import { Card } from './components/Card/Card';
+import { _Loading } from './components/Misc/_Loading';
 
 import './App.scss';
 
@@ -34,6 +35,8 @@ export default class _App extends Component {
               {students.length === 0 && <NoStudentText />}
             </div>
           </div>
+
+          <_Loading />
         </main>
 
         <footer className="footer-bg">
