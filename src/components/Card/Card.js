@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import _Card from './_Card';
 import { deleteStudent } from '../../redux/actions/student.actions';
+import { toggleModal, setModal } from '../../redux/actions/modal.actions';
 
 const mapStateToProps = state => {
   return {};
@@ -8,6 +9,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    edit: id => {
+      dispatch(setModal(id)).then(() => dispatch(toggleModal()));
+    },
     delete: id => dispatch(deleteStudent(id)),
   };
 };

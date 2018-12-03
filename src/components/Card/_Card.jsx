@@ -20,7 +20,11 @@ export default class _Card extends Component {
         </div>
 
         <div className="buttons">
-          <button className="button is-white is-rounded" id="edit">
+          <button
+            className="button is-white is-rounded"
+            id="edit"
+            onClick={() => this.props.edit(id)}
+          >
             Edit
           </button>
           <div id="delete" onClick={() => this.props.delete(id)}>

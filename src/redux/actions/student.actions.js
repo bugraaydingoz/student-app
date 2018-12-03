@@ -36,6 +36,20 @@ export function addStudent(student) {
   };
 }
 
+export function editStudent(id, student) {
+  return dispatch => {
+    return fetch(`/api/v1/students/${id}`, { method: 'PUT' })
+      .then(result => result.json())
+      .then(result => {
+        // TODO: Put status/ok on server
+        if (result.message === 'Student was updated.') {
+          dispatch({ type: DELETE_STUDENT, id });
+        }
+      })
+      .catch(err => console.log(err));
+  };
+}
+
 export function deleteStudent(id) {
   return dispatch => {
     return fetch(`/api/v1/students/${id}`, { method: 'DELETE' })

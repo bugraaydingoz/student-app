@@ -6,6 +6,7 @@ import { addStudent } from '../../redux/actions/student.actions';
 const mapStateToProps = state => {
   return {
     isActive: state.modal.isActive,
+    student: state.modal.student,
   };
 };
 
