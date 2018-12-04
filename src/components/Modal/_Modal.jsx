@@ -163,7 +163,7 @@ export default class _Modal extends Component {
             className="button is-white is-rounded"
             id="modal-add"
             onClick={() => {
-              this.props.handleSubmit(this.state);
+              this.props.handleSubmit(this.state, isEdit);
               this.resetState();
             }}
           >
