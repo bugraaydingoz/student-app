@@ -4,6 +4,7 @@ import modalReducer from './modal.reducer';
 
 export const initialModalState = {
   isActive: false,
+  isLoading: false,
   student: {},
 };
 

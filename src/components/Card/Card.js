@@ -4,7 +4,9 @@ import { deleteStudent } from '../../redux/actions/student.actions';
 import { toggleModal, setModal } from '../../redux/actions/modal.actions';
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    isLoading: state.modal.isLoading,
+  };
 };
 
 const mapDispatchToProps = dispatch => {

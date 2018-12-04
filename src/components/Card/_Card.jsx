@@ -9,6 +9,7 @@ export default class _Card extends Component {
   }
   render() {
     const { id, firstName, lastName, birthDate, hobbies, ppLink } = this.props.student;
+    const isDisabled = this.props.isLoading;
 
     return (
       <div className="card">
@@ -34,6 +35,7 @@ export default class _Card extends Component {
             className="button is-white is-rounded"
             id="edit"
             onClick={() => this.props.edit(id)}
+            disabled={isDisabled}
           >
             Edit
           </button>

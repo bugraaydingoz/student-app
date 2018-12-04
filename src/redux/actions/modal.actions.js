@@ -1,4 +1,9 @@
-import { TOGGLE_MODAL, SET_STUDENT, RESET_MODAL } from '../constants/modal.constants';
+import {
+  TOGGLE_MODAL,
+  SET_STUDENT,
+  RESET_MODAL,
+  SET_STUDENT_LOADING,
+} from '../constants/modal.constants';
 
 // Actions
 export function toggleModal() {
@@ -14,18 +19,29 @@ export function toggleModal() {
 
 export function setModal(id: number) {
   return dispatch => {
+    dispatch(toggleLoading());
     return fetch(`/api/v1/students/${id}`)
       .then(result => result.json())
       .then(result => {
+        dispatch(toggleLoading());
         dispatch({ type: SET_STUDENT, student: result });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        dispatch(toggleLoading());
+      });
   };
 }
 
 export function setStudent(student) {
   return dispatch => {
     return dispatch({ type: SET_STUDENT, student });
+  };
+}
+
+export function toggleLoading() {
+  return dispatch => {
+    return dispatch({ type: SET_STUDENT_LOADING });
   };
 }
 
