@@ -66,6 +66,7 @@ const post = (req, res, next) => {
 const update = (req, res, next) => {
   const studentId = req.params.studentId;
   const newStudent = {
+    id: Number(studentId),
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     birthDate: req.body.birthDate,

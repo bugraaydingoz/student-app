@@ -12,11 +12,7 @@ module.exports = function dateMapper(student, type) {
   switch (type) {
     case 'iso':
       // Map iso to locale
-      console.log(student.birthDate);
-
       birthDate = new Date(student.birthDate);
-      console.log(birthDate);
-
       const day = paddingZero(birthDate.getDate());
       const month = paddingZero(birthDate.getMonth() + 1);
       const year = birthDate.getFullYear();
