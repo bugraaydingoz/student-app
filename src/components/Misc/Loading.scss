@@ -1,6 +1,14 @@
+@import './Variables.scss';
+
 #loading {
+  height: 250px !important;
   left: 50%;
   transform: translateX(-50%) scaleX(0.5) scaleY(0.5);
+
+  @include desktop {
+    font-size: 2rem;
+    height: 350px !important;
+  }
 }
 
 @keyframes animation_1 {

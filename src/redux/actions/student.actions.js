@@ -1,21 +1,31 @@
-// Action Definitions
-export const GET_ALL_STUDENTS = 'GET_ALL_STUDENTS';
-export const GET_STUDENT = 'GET_STUDENT';
-export const ADD_STUDENT = 'ADD_STUDENT';
-export const EDIT_STUDENT = 'EDIT_STUDENT';
-export const DELETE_STUDENT = 'DELETE_STUDENT';
+import {
+  GET_ALL_STUDENTS,
+  GET_ALL_STUDENTS_LOADING,
+  ADD_STUDENT,
+  DELETE_STUDENT,
+} from '../constants/student.constants';
 
 // Actions
-
 export function getAllStudents() {
   return dispatch => {
+    dispatch(toggleStudentsLoading());
     return fetch('/api/v1/students')
       .then(result => result.json())
       .then(result => {
         const students = result.students;
+        dispatch(toggleStudentsLoading());
         dispatch({ type: GET_ALL_STUDENTS, students });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        dispatch(toggleStudentsLoading());
+      });
+  };
+}
+
+export function toggleStudentsLoading() {
+  return dispatch => {
+    return dispatch({ type: GET_ALL_STUDENTS_LOADING });
   };
 }
 

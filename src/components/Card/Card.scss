@@ -1,7 +1,5 @@
 @import 'bulma';
-
-$primary: #1be1b9;
-$primary-light: lighten(#1be1b9, 10%);
+@import '../Misc/Variables.scss';
 
 .card {
   width: auto;

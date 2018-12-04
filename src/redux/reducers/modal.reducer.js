@@ -1,4 +1,4 @@
-import { TOGGLE_MODAL, SET_STUDENT, RESET_MODAL } from '../actions/modal.actions';
+import { TOGGLE_MODAL, SET_STUDENT, RESET_MODAL } from '../constants/modal.constants';
 import { initialModalState } from './root.reducer';
 
 export default function modalReducer(state = initialModalState, action) {

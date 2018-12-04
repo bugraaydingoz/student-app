@@ -1,19 +1,28 @@
-import { GET_ALL_STUDENTS, DELETE_STUDENT, ADD_STUDENT } from '../actions/student.actions';
+import {
+  GET_ALL_STUDENTS,
+  DELETE_STUDENT,
+  ADD_STUDENT,
+  GET_ALL_STUDENTS_LOADING,
+} from '../constants/student.constants';
 import { initialStudentState } from './root.reducer';
 
 // TODO
 export default function studentReducer(state = initialStudentState, action) {
-  switch (action.type) {
-    case GET_ALL_STUDENTS:
-      const students = action.students;
-      return [...state, ...students];
-    case ADD_STUDENT:
-      const student = action.student;
-      return [...state, student];
-    case DELETE_STUDENT:
-      const id = action.id;
-      return state.filter(student => student.id !== id);
-    default:
-      return state;
+  if (action.type === GET_ALL_STUDENTS) {
+    const data = action.students;
+    return { ...state, data };
+  } else if (action.type === GET_ALL_STUDENTS_LOADING) {
+    const isLoading = !state.isLoading;
+    return { ...state, isLoading };
+  } else if (action.type === ADD_STUDENT) {
+    const student = action.student;
+    const data = [...state.data, student];
+    return { ...state, data };
+  } else if (action.type === DELETE_STUDENT) {
+    const id = action.id;
+    const data = state.data.filter(student => student.id !== id);
+    return { ...state, data };
+  } else {
+    return state;
   }
 }

@@ -5,7 +5,8 @@ import { getAllStudents } from './redux/actions/student.actions';
 
 const mapStateToProps = state => {
   return {
-    students: state.students,
+    students: state.students.data,
+    isLoading: state.students.isLoading,
   };
 };
 

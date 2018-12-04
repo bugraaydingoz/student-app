@@ -7,7 +7,10 @@ export const initialModalState = {
   student: {},
 };
 
-export const initialStudentState = [];
+export const initialStudentState = {
+  data: [],
+  isLoading: false,
+};
 
 export const initialRootState = {
   ...initialModalState,

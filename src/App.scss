@@ -1,16 +1,5 @@
 @import 'bulma';
-
-$background: linear-gradient(132deg, #1be1b9, #6c0) !important;
-$background-reverse: linear-gradient(132deg, #6c0, #1be1b9) !important;
-$desktop: 840px;
-
-// #74d381 -> in between
-
-@mixin desktop {
-  @media (min-width: #{$desktop}) {
-    @content;
-  }
-}
+@import './components/Misc/Variables.scss'; // #74d381 -> in between
 
 @mixin bg {
   background: $background;

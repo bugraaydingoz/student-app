@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AddButton } from './components/AddButton/AddButton';
 import { Modal } from './components/Modal/Modal';
 import { Card } from './components/Card/Card';
-import { _Loading } from './components/Misc/_Loading';
+import { Loading } from './components/Misc/Loading';
 
 import './App.scss';
 
@@ -13,6 +13,7 @@ export default class _App extends Component {
 
   render() {
     const students = this.props.students || [];
+    const isLoading = this.props.isLoading;
 
     return (
       <div className="app">
@@ -32,11 +33,10 @@ export default class _App extends Component {
               {students.map((student, index) => {
                 return <CardContainer key={index} student={student} />;
               })}
-              {students.length === 0 && <NoStudentText />}
+              {isLoading && students.length === 0 && <Loading />}
+              {!isLoading && students.length === 0 && <NoStudentText />}
             </div>
           </div>
-
-          <_Loading />
         </main>
 
         <footer className="footer-bg">
@@ -62,6 +62,6 @@ const CardContainer = student => (
 
 const NoStudentText = () => (
   <div className="column is-full">
-    <h1 className="no-student has-text-centered">There is not any students yet.</h1>
+    <h1 className="no-student has-text-centered">There are not any students.</h1>
   </div>
 );

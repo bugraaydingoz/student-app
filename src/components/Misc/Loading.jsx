@@ -1,6 +1,6 @@
 import React from 'react';
 import './Loading.scss';
-export const _Loading = () => (
+export const Loading = () => (
   <>
     <div id="loading" className="animation">
       <div />
