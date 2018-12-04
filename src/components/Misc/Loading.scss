@@ -1,0 +1,132 @@
+@import './Variables.scss';
+
+#loading {
+  height: 250px !important;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0.5) scaleY(0.5);
+
+  @include desktop {
+    font-size: 2rem;
+    height: 350px !important;
+  }
+}
+
+@keyframes animation_1 {
+  0% {
+    top: 36px;
+    height: 128px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+@-webkit-keyframes animation_1 {
+  0% {
+    top: 36px;
+    height: 128px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+@keyframes animation_2 {
+  0% {
+    top: 41.99999999999999px;
+    height: 116.00000000000001px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+@-webkit-keyframes animation_2 {
+  0% {
+    top: 41.99999999999999px;
+    height: 116.00000000000001px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+@keyframes animation_3 {
+  0% {
+    top: 48px;
+    height: 104px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+@-webkit-keyframes animation_3 {
+  0% {
+    top: 48px;
+    height: 104px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+.animation {
+  position: relative;
+}
+.animation div {
+  position: absolute;
+  width: 30px;
+}
+.animation div:nth-child(1) {
+  left: 35px;
+  background: #1be1b9;
+  -webkit-animation: animation_1 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation: animation_1 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+.animation div:nth-child(2) {
+  left: 85px;
+  background: #74d381;
+  -webkit-animation: animation_2 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation: animation_2 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+.animation div:nth-child(3) {
+  left: 135px;
+  background: #6c0;
+  -webkit-animation: animation_3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation: animation_3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.animation {
+  width: 200px !important;
+  height: 200px !important;
+  -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
