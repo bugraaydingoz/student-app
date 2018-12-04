@@ -8,7 +8,7 @@ export default class _Card extends Component {
     event.target.src = src;
   }
   render() {
-    const { id, firstName, lastName, birthDate, hobbies, ppLink } = this.props.student.student;
+    const { id, firstName, lastName, birthDate, hobbies, ppLink } = this.props.student;
 
     return (
       <div className="card">

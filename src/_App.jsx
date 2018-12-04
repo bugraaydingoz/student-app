@@ -54,7 +54,7 @@ export default class _App extends Component {
   }
 }
 
-const CardContainer = student => (
+const CardContainer = ({ student }) => (
   <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
     <Card student={student} />
   </div>
