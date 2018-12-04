@@ -8,9 +8,11 @@ const storage = multer.diskStorage({
     cb(null, './uploads');
   },
   filename: (req, file, cb) => {
-    const { firstName, lastName } = req.body;
-    const ext = file.mimetype === 'image/jpeg' ? 'jpeg' : 'png';
-    cb(null, `${new Date().toISOString()}_${firstName}_${lastName}.${ext}`);
+    if (file) {
+      const { firstName, lastName } = req.body;
+      const ext = file.mimetype === 'image/jpeg' ? 'jpeg' : 'png';
+      cb(null, `${new Date().toISOString()}_${firstName}_${lastName}.${ext}`);
+    }
   },
 });
 
@@ -22,12 +24,13 @@ const fileFilter = (req, file, cb) => {
     cb(new Error('Invalid extension.'), false);
   }
 };
-const upload = multer({ storage, fileFilter });
+const uploadAdd = multer({ storage, fileFilter });
+const uploadEdit = multer({ storage });
 
 router.get('/', studentController.getAll);
 router.get('/:studentId', studentController.get);
-router.post('/', upload.single('profilePicture'), studentController.post);
-router.put('/:studentId', studentController.update);
+router.post('/', uploadAdd.single('profilePicture'), studentController.post);
+router.put('/:studentId', uploadEdit.single('profilePicture'), studentController.update);
 router.delete('/:studentId', studentController.remove);
 
 module.exports = router;

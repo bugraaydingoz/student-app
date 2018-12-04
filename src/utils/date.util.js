@@ -12,9 +12,13 @@ module.exports = function dateMapper(student, type) {
   switch (type) {
     case 'iso':
       // Map iso to locale
+      console.log(student.birthDate);
+
       birthDate = new Date(student.birthDate);
-      const month = birthDate.getMonth() + 1;
-      const day = birthDate.getDate();
+      console.log(birthDate);
+
+      const day = paddingZero(birthDate.getDate());
+      const month = paddingZero(birthDate.getMonth() + 1);
       const year = birthDate.getFullYear();
       birthDate = `${day}.${month}.${year}`;
       _student = { ...student, birthDate };
@@ -25,8 +29,8 @@ module.exports = function dateMapper(student, type) {
       const isCorrect = /^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$/.test(student.birthDate);
       if (isCorrect) {
         let dateArray = student.birthDate.split('.');
-        const d = Number(dateArray[0]);
-        const m = Number(dateArray[1]);
+        const d = paddingZero(Number(dateArray[0]));
+        const m = paddingZero(Number(dateArray[1]));
         const y = Number(dateArray[2]);
         birthDate = `${y}-${m}-${d}T00:00:00.000Z`;
         _student = { ...student, birthDate };
@@ -41,3 +45,8 @@ module.exports = function dateMapper(student, type) {
 
   return _student;
 };
+
+function paddingZero(n) {
+  // 1 => 01
+  return String('00' + n).slice(-2);
+}

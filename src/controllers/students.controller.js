@@ -15,7 +15,10 @@ const getAll = (req, res, next) => {
         .status(200)
         .json({ ok: 1, message: 'Students were fetched.', count, students: _students });
     })
-    .catch(next);
+    .catch(err => {
+      console.log(err);
+      next();
+    });
 };
 
 const get = (req, res, next) => {
@@ -26,7 +29,10 @@ const get = (req, res, next) => {
       _student = dateMapper(_student, 'iso');
       res.status(200).json({ ..._student });
     })
-    .catch(next);
+    .catch(err => {
+      console.log(err);
+      next();
+    });
 };
 
 const post = (req, res, next) => {
@@ -51,36 +57,69 @@ const post = (req, res, next) => {
         student: { ..._student },
       });
     })
-    .catch(next);
+    .catch(err => {
+      console.log(err);
+      next();
+    });
 };
 
 const update = (req, res, next) => {
   const studentId = req.params.studentId;
-  const student = {
+  const newStudent = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     birthDate: req.body.birthDate,
     hobbies: req.body.hobbies,
+    ppLink: req.file && req.file.path,
   };
 
-  query(
-    `UPDATE students SET first_name = ?, last_name = ?, birth_date = ?, hobbies = ? WHERE id = ?`,
-    [...Object.values(student), studentId],
-  )
-    .then(response => {
-      let _student = { ...student, id: studentId };
+  let _student = {};
+  query(`SELECT * FROM students WHERE id = ${studentId}`)
+    .then(oldStudent => {
+      if (!oldStudent[0]) {
+        res.status(404).json({ ok: 0, message: 'Student does not exist.' });
+      } else {
+        _student = studentMapper(oldStudent[0], 'snake');
+        return _student;
+      }
+    })
+    .then(() => {
+      if (!newStudent.ppLink) {
+        _student = { ...newStudent, ppLink: _student.ppLink };
+      } else {
+        // Also remove the profile picture.
+        try {
+          fs.unlinkSync(_student.ppLink);
+        } catch (error) {
+          console.log(error);
+        }
+
+        _student = { ...newStudent };
+      }
+
       _student = dateMapper(_student, 'locale');
+
+      return query(
+        `UPDATE students SET first_name = ?, last_name = ?, birth_date = ?, hobbies = ?, pp_link = ? WHERE id = ?`,
+        [...Object.values(_student), studentId],
+      );
+    })
+    .then(response => {
+      _student = dateMapper(_student, 'iso');
       res.status(201).json({ ok: 1, message: 'Student was updated.', student: _student });
     })
-    .catch(next);
+    .catch(err => {
+      console.log(err);
+      next();
+    });
 };
 
 const remove = (req, res, next) => {
   const studentId = req.params.studentId;
-  let _student = [];
+  let _student = {};
   query(`SELECT * FROM students WHERE id = ${studentId}`)
     .then(student => {
-      if (!student) {
+      if (!student[0]) {
         res.status(404).json({ ok: 0, message: 'Student does not exist.' });
       } else {
         _student = studentMapper(student[0], 'snake');
@@ -91,10 +130,19 @@ const remove = (req, res, next) => {
       return query(`DELETE FROM students WHERE id = ${studentId}`);
     })
     .then(response => {
-      fs.unlinkSync(_student.ppLink);
+      // Also remove the profile picture.
+      try {
+        fs.unlinkSync(_student.ppLink);
+      } catch (error) {
+        console.log(error);
+      }
+
       res.status(200).json({ ok: 1, message: 'Student was deleted.' });
     })
-    .catch(next);
+    .catch(err => {
+      console.log(err);
+      next();
+    });
 };
 
 module.exports = {
