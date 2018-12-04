@@ -1,3 +1,4 @@
+const fs = require('fs');
 const query = require('../utils/db.util');
 const studentMapper = require('../utils/object.util');
 const dateMapper = require('../utils/date.util');
@@ -76,8 +77,21 @@ const update = (req, res, next) => {
 
 const remove = (req, res, next) => {
   const studentId = req.params.studentId;
-  query(`DELETE FROM students WHERE id = ${studentId}`)
+  let _student = [];
+  query(`SELECT * FROM students WHERE id = ${studentId}`)
+    .then(student => {
+      if (!student) {
+        res.status(404).json({ ok: 0, message: 'Student does not exist.' });
+      } else {
+        _student = studentMapper(student[0], 'snake');
+        return _student;
+      }
+    })
+    .then(() => {
+      return query(`DELETE FROM students WHERE id = ${studentId}`);
+    })
     .then(response => {
+      fs.unlinkSync(_student.ppLink);
       res.status(200).json({ ok: 1, message: 'Student was deleted.' });
     })
     .catch(next);
