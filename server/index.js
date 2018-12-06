@@ -3,11 +3,14 @@ const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
 
+const clientPath = path.join(__dirname, '../../client/build');
+
 // Routes
 const studentsRoute = require('./src/routes/students.route');
 
 // Middleware
 app.use(morgan('dev'));
+app.use(express.static(clientPath));
 app.use('/uploads', express.static('uploads'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
