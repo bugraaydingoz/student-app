@@ -1,3 +1,5 @@
+// @flow
+
 import {
   TOGGLE_MODAL,
   SET_STUDENT,

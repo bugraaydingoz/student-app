@@ -1,3 +1,5 @@
+// @flow
+
 import { connect } from 'react-redux';
 import _Modal from './_Modal';
 import { toggleModal, resetModal, setStudent } from '../../redux/actions/modal.actions';

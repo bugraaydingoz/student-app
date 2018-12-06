@@ -1,9 +1,12 @@
+// @flow
+
 import {
   TOGGLE_MODAL,
   SET_STUDENT,
   RESET_MODAL,
   SET_STUDENT_LOADING,
 } from '../constants/modal.constants';
+import { Student } from '../../types/student';
 
 // Actions
 export function toggleModal() {
@@ -33,7 +36,7 @@ export function setModal(id: number) {
   };
 }
 
-export function setStudent(student) {
+export function setStudent(student: Student) {
   return dispatch => {
     return dispatch({ type: SET_STUDENT, student });
   };

@@ -1,7 +1,17 @@
-import React, { Component } from 'react';
+// @flow
 
+import React, { Component } from 'react';
+import { Student } from '../../types/student';
 import './Modal.scss';
-export default class _Modal extends Component {
+
+type Props = {
+  isActive: boolean,
+  student: Student,
+  toggle: () => void,
+  handleSubmit: (student: Student, isEdit: boolean) => void,
+};
+
+export default class _Modal extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {

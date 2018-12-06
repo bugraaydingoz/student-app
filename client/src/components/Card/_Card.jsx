@@ -1,7 +1,17 @@
-import React, { Component } from 'react';
+// @flow
 
+import React, { Component } from 'react';
+import { Student } from '../../types/student';
 import './Card.scss';
-export default class _Card extends Component {
+
+type Props = {
+  student: Student,
+  isLoading: boolean,
+  edit: (id: number) => void,
+  delete: (id: number) => void,
+};
+
+export default class _Card extends Component<Props> {
   onImageError(event) {
     const src = 'https://via.placeholder.com/256x256?text=:)';
     event.target.onerror = null;

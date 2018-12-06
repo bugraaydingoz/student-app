@@ -1,3 +1,4 @@
+// @flow
 import {
   GET_ALL_STUDENTS,
   DELETE_STUDENT,
@@ -7,7 +8,6 @@ import {
 } from '../constants/student.constants';
 import { initialStudentState } from './root.reducer';
 
-// TODO
 export default function studentReducer(state = initialStudentState, action) {
   if (action.type === GET_ALL_STUDENTS) {
     const data = action.students;

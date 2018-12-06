@@ -1,3 +1,5 @@
+// @flow
+
 import { connect } from 'react-redux';
 import _AddButton from './_AddButton';
 import { toggleModal } from '../../redux/actions/modal.actions';

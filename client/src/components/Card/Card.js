@@ -1,3 +1,5 @@
+// @flow
+
 import { connect } from 'react-redux';
 import _Card from './_Card';
 import { deleteStudent } from '../../redux/actions/student.actions';
@@ -11,10 +13,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    edit: id => {
+    edit: (id: number) => {
       dispatch(setModal(id)).then(() => dispatch(toggleModal()));
     },
-    delete: id => dispatch(deleteStudent(id)),
+    delete: (id: number) => dispatch(deleteStudent(id)),
   };
 };
 

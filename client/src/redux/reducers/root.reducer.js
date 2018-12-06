@@ -1,3 +1,5 @@
+// @flow
+
 import { combineReducers } from 'redux';
 import studentReducer from './student.reducer';
 import modalReducer from './modal.reducer';

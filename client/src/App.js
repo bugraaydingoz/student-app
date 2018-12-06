@@ -1,5 +1,6 @@
-import { connect } from 'react-redux';
+// @flow
 
+import { connect } from 'react-redux';
 import _App from './_App';
 import { getAllStudents } from './redux/actions/student.actions';
 

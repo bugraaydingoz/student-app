@@ -1,12 +1,20 @@
+// @flow
+
 import React, { Component } from 'react';
 import { AddButton } from './components/AddButton/AddButton';
 import { Modal } from './components/Modal/Modal';
 import { Card } from './components/Card/Card';
 import { Loading } from './components/Misc/Loading';
-
+import { Student } from './types/student';
 import './App.scss';
 
-export default class _App extends Component {
+type Props = {
+  fetchStudents: () => void,
+  students: Student[],
+  isLoading: boolean,
+};
+
+export default class _App extends Component<Props> {
   componentDidMount() {
     this.props.fetchStudents();
   }
