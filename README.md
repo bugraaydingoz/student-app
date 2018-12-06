@@ -3,7 +3,9 @@
 It is a react app where you can see all students with their first name, last name, birth
 date, hobbies, photo. Also you can add new student, edit or delete a student.
 
-### How to Run
+![alt text](./screenshot.png 'Screenshot')
+
+#### How to Run
 
 You can run the application in several ways. But the easiest way is using docker-compose.
 
@@ -21,9 +23,9 @@ cd client && npm start
 cd server && npm start
 ```
 
-## Student App Api
+### Student App Api
 
-### Example .env file
+#### Example .env file
 
 ```
 DB_HOST=127.0.0.1
@@ -32,7 +34,7 @@ DB_PASSWORD=password
 DB_SCHEME=scheme
 ```
 
-### Technology Stack
+#### Technology Stack
 
 -   Node.js
 -   Express.js
@@ -41,9 +43,9 @@ DB_SCHEME=scheme
 -   Eslint
 -   Jest
 
-## Student App Web
+### Student App Web
 
-### Technology Stack
+#### Technology Stack
 
 -   React.js
 -   Redux
@@ -55,7 +57,7 @@ DB_SCHEME=scheme
 -   Eslint
 -   Jest
 
-## Demo
+### Demo
 
 You can see the working application in the link below:
 
