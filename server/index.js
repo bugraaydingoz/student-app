@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
+const development = process.env.NODE_DEV;
 
 const clientPath = path.join(__dirname, '../client/build');
 
@@ -10,7 +11,10 @@ const clientPath = path.join(__dirname, '../client/build');
 const studentsRoute = require('./src/routes/students.route');
 
 // Middleware
-app.use(morgan('dev'));
+if (development) {
+  app.use(morgan('dev'));
+}
+
 app.use(express.static(clientPath));
 app.use('/uploads', express.static('uploads'));
 app.use(express.urlencoded({ extended: false }));
@@ -19,10 +23,12 @@ app.use(cors());
 
 app.use('/api/v1/students', studentsRoute);
 
-// All remaining requests return the React app, so it can handle routing.
-app.get('*', function(request, response) {
-  response.sendFile(path.join(clientPath, 'index.html'));
-});
+if (!development) {
+  // All remaining requests return the React app, so it can handle routing.
+  app.get('*', function(request, response) {
+    response.sendFile(path.join(clientPath, 'index.html'));
+  });
+}
 
 // Error handling
 app.use((req, res, next) => {
@@ -41,8 +47,8 @@ app.use((error, req, res, next) => {
 });
 
 const port = process.env.PORT || 3001;
-const host = '0.0.0.0';
+// const host = '0.0.0.0';
 
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`Server started at port ${port}`);
 });

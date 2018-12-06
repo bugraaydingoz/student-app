@@ -41,7 +41,7 @@ const post = (req, res, next) => {
     lastName: req.body.lastName,
     birthDate: req.body.birthDate,
     hobbies: req.body.hobbies,
-    ppLink: req.file.path,
+    ppLink: (req.file && req.file.path) || '',
   };
 
   let _student = dateMapper(student, 'locale');
