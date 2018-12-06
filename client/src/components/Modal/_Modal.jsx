@@ -30,6 +30,7 @@ export default class _Modal extends Component<Props> {
     this.handleBirthDate = this.handleBirthDate.bind(this);
     this.handleHobbies = this.handleHobbies.bind(this);
     this.handleFile = this.handleFile.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.resetState = this.resetState.bind(this);
   }
 
@@ -65,10 +66,16 @@ export default class _Modal extends Component<Props> {
   }
 
   handleFile(event) {
+    const file = event.target.files[0] || {};
     this.setState({
-      file: event.target.files[0],
-      fileName: event.target.files[0].name,
+      file: file,
+      fileName: (file && file.name) || '',
     });
+  }
+
+  handleClick(event) {
+    // So, We are able to select same file again.
+    event.target.value = null;
   }
 
   resetState() {
@@ -92,7 +99,13 @@ export default class _Modal extends Component<Props> {
     const title = !isEdit ? 'Add a new student' : 'Edit the student';
     return (
       <div className={`modal ${isActive}`}>
-        <div className="modal-background" onClick={this.props.toggle} />
+        <div
+          className="modal-background"
+          onClick={() => {
+            this.resetState();
+            this.props.toggle();
+          }}
+        />
         <div className="modal-content">
           <h1 className="title is-3">{title}</h1>
           <div className="field">
@@ -155,6 +168,7 @@ export default class _Modal extends Component<Props> {
                   className="file-input"
                   type="file"
                   name="profilePicture"
+                  onClick={this.handleClick}
                   onChange={this.handleFile}
                 />
                 <span className="file-cta">
@@ -180,7 +194,14 @@ export default class _Modal extends Component<Props> {
             Submit
           </button>
         </div>
-        <button className="modal-close is-large" aria-label="close" onClick={this.props.toggle} />
+        <button
+          className="modal-close is-large"
+          aria-label="close"
+          onClick={() => {
+            this.resetState();
+            this.props.toggle();
+          }}
+        />
       </div>
     );
   }
