@@ -1,11 +1,14 @@
 const router = require('express').Router();
+const mkdirp = require('mkdirp');
 const studentController = require('../controllers/students.controller');
 
 // Handle file upload
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads');
+    const dest = './uploads';
+    mkdirp.sync(dest);
+    cb(null, dest);
   },
   filename: (req, file, cb) => {
     if (file) {
