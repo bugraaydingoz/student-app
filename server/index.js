@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 
-const clientPath = path.join(__dirname, '../../client/build');
+const clientPath = path.join(__dirname, '../client/build');
 
 // Routes
 const studentsRoute = require('./src/routes/students.route');
@@ -17,6 +18,11 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/v1/students', studentsRoute);
+
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+  response.sendFile(path.join(clientPath, 'index.html'));
+});
 
 // Error handling
 app.use((req, res, next) => {
@@ -34,9 +40,9 @@ app.use((error, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
-const HOST = '0.0.0.0';
+const port = process.env.PORT || 3001;
+const host = '0.0.0.0';
 
-app.listen(PORT, HOST, () => {
-  console.log(`Server started at port ${PORT}`);
+app.listen(port, host, () => {
+  console.log(`Server started at port ${port}`);
 });
